@@ -1,12 +1,12 @@
 pipeline {
     agent any
     environment {
-        PATH = "/opt/apache-maven-3.6.3/bin:$PATH"
+        PATH = "/usr/share/maven/bin:$PATH"
     }
     stages {
         stage("clone code"){
             steps{
-               git credentialsId: 'git_credentials', url: 'https://github.com/ravdy/hello-world.git'
+               git credentialsId: 'neel8989', url: 'https://github.com/neel8989/cicd-maven-helloworld'
             }
         }
         stage("build code"){
@@ -14,13 +14,6 @@ pipeline {
               sh "mvn clean install"
             }
         }
-        stage("deploy"){
-            steps{
-              sshagent(['deploy_user']) {
-                 sh "scp -o StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@13.229.183.126:/opt/apache-tomcat-8.5.55/webapps"
-                 
-                }
-            }
-        }
+        
     }
 }
