@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage("clone code"){
             steps{
-               git credentialsId: 'neel8989', url: 'https://github.com/neel8989/cicd-maven-helloworld'
+               git branch: 'main', credentialsId: 'neel8989', url: 'https://github.com/neel8989/cicd-maven-helloworld'
             }
         }
         stage("build code"){
